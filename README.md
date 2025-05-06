@@ -1,12 +1,16 @@
-# HW-10 Event Manager Company: Software QA Analyst/Developer Onboarding Assignment
+# The User Management System 
 
-Welcome to the Event Manager Company! As a newly hired Software QA Analyst/Developer and a student in software engineering, you are embarking on an exciting journey to contribute to our project aimed at developing a secure, robust REST API that supports JWT token-based OAuth2 authentication. This API serves as the backbone of our user management system and will eventually expand to include features for event management and registration.
+The User Management System Final Project is designed as a comprehensive, hands-on opportunity to explore the full development lifecycle of a real-world software application. This system manages users, authentication, and roles, offering a practical implementation of backend development best practices using Python, FastAPI, SQLAlchemy, PostgreSQL, and modern authentication mechanisms like JWT. Whether you're defining schemas, managing secure login flows, or integrating third-party APIs (like email or OpenAI), this project gives you the complete playground to sharpen your backend skills in a robust and scalable way.
+
+At its core, the project emphasizes clean architecture and modular design, encouraging the use of services, routers, models, and configuration files in an organized manner. By applying principles like environment-based configuration management with pydantic-settings, asynchronous database operations, and test-driven development with Pytest, the project mimics what you’d encounter in professional software engineering teams. It’s more than just CRUD—it’s about security, scalability, and maintainability.
+
+More than a coding assignment, this final project is a stepping stone into real-world application building. Whether you're aiming to ace your coursework, impress recruiters, or contribute to open-source communities, this project encapsulates the critical components of a production-grade backend system. So buckle up—it’s not just an academic task; it’s your launchpad to becoming a confident, industry-ready developer.
 
 ## Setup and Preliminary Steps
 1. Fork the Project Repository: Fork the project repository to my own GitHub account. 
 
 2. Clone the Forked Repository: Clone the forked repository to our local machine using the git clone command. This creates a local copy of the repository on our computer, enabling we  make changes and run the project locally.
-- git clone git@github.com:your-username/HW-10_event_manager.git
+- git clone git@github.com:your-username/user_management.git
 
 3. Verify the Project Setup: Follow the steps in the instructor video to set up the project using Docker. Docker allows our to package the application with all its dependencies into a standardized unit called a container. Verify that you can access the API documentation at http://localhost/docs and the database using PGAdmin at http://localhost:5050.
 
@@ -26,8 +30,7 @@ Welcome to the Event Manager Company! As a newly hired Software QA Analyst/Devel
  ValidationError: Indicates that the input data does not match the expected schema.
 
 - Fix Error:
-- change file https://github.com/nisha2110/HW-10_event_manager_final/blob/main/tests/test_schemas/test_user_schemas.py
-- Link https://github.com/nisha2110/HW-10_event_manager_final/blob/main/1-1-validation.PNG
+- change file https://github.com/satyavinay5566/user_management/blob/main/tests/test_schemas/test_user_schemas.py
 
 2. Nickname and username Validation:
 - Resolved the issue with auto-generating nicknames during user registration. The manually generated nickname is now passed as an argument to the generate_nickname method, ensuring it updates correctly in the database.
@@ -46,31 +49,17 @@ Welcome to the Event Manager Company! As a newly hired Software QA Analyst/Devel
  
  - All pytests successfully Run
  - CMDcommand Run: docker compose exec fastapi pytest tests
- - ![pytest-run](https://github.com/user-attachments/assets/966deb6e-11f4-49ed-9ffb-101fea816cc3)
 
  4. Missing Token Fixure:
   - Developed pytest fixtures to generate access tokens for various roles like Users, Admins, Managers.
     These fixtures facilitate authentication for tests, ensuring seamless execution of all tests requiring authenticated access while enhancing the efficiency and maintainability of the testing process.
-    change file: https://github.com/nisha2110/HW-10_event_manager_final/blob/main/tests/test_conftest.py
 
  5. Password Validation:
  -  Standard password Rules set  minimum length, at least one upper case, lower case, numbers, and special character and and properly hashing passwords before storing them in the database.
- - link https://github.com/nisha2110/HW-10_event_manager_final/blob/main/app/schemas/user_schemas.py
 
  ## Testing and Coverage
  - Comprehensive testing was performed using pytest to ensure a high degree of confidence in the application:
  - I Achieved 93% test coverage.
- - https://github.com/nisha2110/HW-10_event_manager_final/actions/runs/12152417576/job/33888787582
-
- - ![pytest](https://github.com/user-attachments/assets/1f1b54c6-d573-43cb-9dd9-b47d3aba5c7e)
-
- ## Pytest coverage:
- 
- ![testcoverage](https://github.com/user-attachments/assets/cab7844c-434c-4453-b8d0-6293d90c8a1e)
-
- ## DockerHub Image Link:
- - https://hub.docker.com/repository/docker/nishi2110/hw-10_eventmanager/general
- - ![docker-hub](https://github.com/user-attachments/assets/e55b90c5-c4cf-463a-ad25-f2da5ea09723)
 
  
  ## Learning this project:
