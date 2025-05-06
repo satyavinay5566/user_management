@@ -47,17 +47,12 @@ jobs:
           
       - name: Run tests with Pytest
         env:
-          DATABASE_URL: env:
-  DATABASE_URL: DATABASE_URL: postgresql+asyncpg://user:password@localhost:5432/myappdb
-
-  # Configure the DATABASE_URL environment variable for tests
+          DATABASE_URL: postgresql+asyncpg://user:password@localhost:5432/myappdb  # Configure the DATABASE_URL environment variable for tests
           
         run: pytest
       - name: Run tests with Pytest cov
         env:
-          DATABASE_URL:env:
-  DATABASE_URL: postgresql+asyncpg://user:password@postgres:5432/myappdb
-  # Configure the DATABASE_URL environment variable for tests
+          DATABASE_URL: postgresql+asyncpg://user:password@localhost:5432/myappdb  # Configure the DATABASE_URL environment variable for tests
         run: pytest --cov  
 
   build-and-push-docker:
