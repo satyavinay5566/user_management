@@ -24,10 +24,9 @@ RUN apt-get update \
 # Copy only the requirements, to cache them in Docker layer
 COPY ./requirements.txt /myapp/requirements.txt
 
-# Upgrade pip and install Python dependencies from requirements file
-RUN pip --version && \
-    pip install --upgrade pip --timeout=120 --no-cache-dir && \
-    pip install -r requirements.txt --timeout=120 --no-cache-dir
+# Install Python dependencies from requirements file
+RUN pip install --upgrade pip --timeout=120 --no-cache-dir \
+    && pip install -r requirements.txt --timeout=120 --no-cache-dir
 
 # Add a non-root user and switch to it
 RUN useradd -m myuser
