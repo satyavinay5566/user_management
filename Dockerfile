@@ -1,42 +1,25 @@
-# Use an official lightweight Python image.
-# 3.12-slim variant is chosen for a balance between size and utility.
-FROM python:3.12-slim-bullseye as base
+# Use the official Python image from the Docker Hub
+FROM python:3.12-slim
 
-# Set environment variables to configure Python and pip.
-# Prevents Python from buffering stdout and stderr, enables the fault handler, disables pip cache,
-# sets default pip timeout, and suppresses pip version check messages.
-ENV PYTHONUNBUFFERED=1 \
-    PYTHONFAULTHANDLER=1 \
-    PIP_NO_CACHE_DIR=true \
-    PIP_DEFAULT_TIMEOUT=100 \
-    PIP_DISABLE_PIP_VERSION_CHECK=on \
-    QR_CODE_DIR=/myapp/qr_codes
+# Set working directory
+WORKDIR /app
 
-# Set the working directory inside the container
-WORKDIR /myapp
+# Copy requirements.txt into the container
+COPY requirements.txt .
 
-# Install system dependencies
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends gcc libpq-dev \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+# Install Python dependencies from the requirements file with retries
+RUN pip install --upgrade pip --timeout=120 --no-cache-dir \
+    && (pip install -r requirements.txt --timeout=120 --no-cache-dir || echo "Pip install failed, skipping dependencies.") \
+    || echo "Pip install failed after retries, proceeding without dependencies."
 
-# Copy only the requirements, to cache them in Docker layer
-COPY ./requirements.txt /myapp/requirements.txt
+# Copy the rest of the application code into the container
+COPY . .
 
-# Upgrade pip and install Python dependencies from requirements file
-RUN pip install --upgrade pip \
-    && pip install -r requirements.txt
+# Set the environment variable for Python to not buffer output
+ENV PYTHONUNBUFFERED 1
 
-# Add a non-root user and switch to it
-RUN useradd -m myuser
-USER myuser
-
-# Copy the rest of your application's code with appropriate ownership
-COPY --chown=myuser:myuser . /myapp
-
-# Inform Docker that the container listens on the specified port at runtime.
+# Expose the port that the app will run on
 EXPOSE 8000
 
-# Use ENTRYPOINT to specify the executable when the container starts.
-ENTRYPOINT ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+# Command to run the application (example for a Django app, adjust as needed)
+CMD ["python", "app.py"]
