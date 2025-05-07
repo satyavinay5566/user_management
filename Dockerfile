@@ -8,7 +8,7 @@ FROM python:3.12-slim-bullseye AS base
 ENV PYTHONUNBUFFERED=1 \
     PYTHONFAULTHANDLER=1 \
     PIP_NO_CACHE_DIR=true \
-    PIP_DEFAULT_TIMEOUT=100 \
+    PIP_DEFAULT_TIMEOUT=120 \
     PIP_DISABLE_PIP_VERSION_CHECK=on \
     QR_CODE_DIR=/myapp/qr_codes
 
@@ -25,8 +25,9 @@ RUN apt-get update \
 COPY ./requirements.txt /myapp/requirements.txt
 
 # Upgrade pip and install Python dependencies from requirements file
-RUN pip install --upgrade pip \
-    && pip install -r requirements.txt
+RUN pip --version && \
+    pip install --upgrade pip --timeout=120 --no-cache-dir && \
+    pip install -r requirements.txt --timeout=120 --no-cache-dir
 
 # Add a non-root user and switch to it
 RUN useradd -m myuser
