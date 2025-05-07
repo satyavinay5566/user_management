@@ -68,8 +68,7 @@ More than a coding assignment, this final project is a stepping stone into real-
  ![Coverage Report](https://github.com/satyavinay5566/user_management/blob/main/docker.jpg)
 
 ## 6. Feature: Event-Driven Email Notifications with Celery and Kafka
-
-    The goal is to refactor your existing email notification system to use a distributed, event-driven architecture using:
+- The goal is to refactor your existing email notification system to use a distributed, event-driven architecture using:
 
 Celery as the task queue (asynchronous processing)
 
