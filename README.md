@@ -49,6 +49,9 @@ More than a coding assignment, this final project is a stepping stone into real-
  
  - All pytests successfully Run
  - CMDcommand Run: docker compose exec fastapi pytest tests
+ - ![Coverage Report](https://github.com/satyavinay5566/user_management/blob/main/test.png)
+
+
 
  4. Missing Token Fixure:
   - Developed pytest fixtures to generate access tokens for various roles like Users, Admins, Managers.
@@ -60,8 +63,10 @@ More than a coding assignment, this final project is a stepping stone into real-
  ## Testing and Coverage
  - Comprehensive testing was performed using pytest to ensure a high degree of confidence in the application:
  - I Achieved 93% test coverage.
+  ![Coverage Report](https://github.com/satyavinay5566/user_management/blob/main/covrage.png)
 
- 
+ ![Coverage Report](https://github.com/satyavinay5566/user_management/blob/main/docker.jpg)
+
  ## Learning this project:
  Through this project, I gained valuable insights into the product lifecycle and the process of building production-ready applications. Here are my key takeaways:
 - Testing is Essential at Every Stage
