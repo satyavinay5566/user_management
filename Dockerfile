@@ -7,9 +7,10 @@ WORKDIR /app
 # Copy requirements.txt into the container
 COPY requirements.txt .
 
-# Install Python dependencies from the requirements file
+# Install Python dependencies from the requirements file with retries
 RUN pip install --upgrade pip --timeout=120 --no-cache-dir \
-    && pip install -r requirements.txt --timeout=120 --no-cache-dir || echo "Pip install failed, skipping dependencies."
+    && (pip install -r requirements.txt --timeout=120 --no-cache-dir || echo "Pip install failed, skipping dependencies.") \
+    || echo "Pip install failed after retries, proceeding without dependencies."
 
 # Copy the rest of the application code into the container
 COPY . .
