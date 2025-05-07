@@ -1,10 +1,7 @@
-name: CI/CD Pipeline
+name: Build and Scan Docker Image
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
     branches:
       - main
 
@@ -33,11 +30,13 @@ jobs:
           cache-from: type=registry,ref=vinay9669/user_management:cache
           cache-to: type=inline,mode=max
 
-      - name: Scan the Docker image with Trivy
+      - name: Run Trivy Vulnerability Scanner
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: vinay9669/user_management:${{ github.sha }}
           format: table
-          exit-code: 1
+          exit-code: 1  # Fail if vulnerabilities found
           ignore-unfixed: true
           severity: CRITICAL,HIGH
+          scan-type: image
+          vuln-type: os,library
