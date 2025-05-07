@@ -67,6 +67,111 @@ More than a coding assignment, this final project is a stepping stone into real-
 
  ![Coverage Report](https://github.com/satyavinay5566/user_management/blob/main/docker.jpg)
 
+ 6. Feature: Event-Driven Email Notifications with Celery and Kafka
+
+    The goal is to refactor your existing email notification system to use a distributed, event-driven architecture using:
+
+Celery as the task queue (asynchronous processing)
+
+Kafka as the message/event broker (event-based communication)
+
+This enables:
+
+High performance
+
+Scalability
+
+Reliability
+
+Better decoupling of services
+
+## How It Works 
+- An Event Happens
+Example: A user signs up and needs to verify their account.
+
+-Your App Publishes an Event to Kafka
+Kafka Topic: account.verification
+
+-Celery Worker Listens for Events (via Kafka)
+Celery consumes this message and triggers the appropriate task handler.
+
+-Celery Executes Task Asynchronously
+A Celery task uses the message payload to send a verification email to the user using the email service.
+
+ ## Asynchronous Email Sending with Celery
+What it does:
+Moves email-sending logic out of the main web app request-response cycle and into a background task queue using Celery.
+
+Why it matters:
+
+Avoids blocking HTTP responses while sending emails.
+
+Improves app responsiveness and user experience.
+
+Supports retries, scheduling, and distributed workers.
+
+Example:
+A verification email is queued and sent in the background after a user signs up—without delaying the sign-up response.
+
+
+## Event-Driven Architecture with Kafka
+What it does:
+Uses Kafka as a message/event broker to publish and consume events for email notifications.
+
+Why it matters:
+
+Enables loosely coupled services.
+
+Scales efficiently to handle many event types and volumes.
+
+Makes your system reactive to user actions.
+
+Example:
+When a user upgrades to "professional" status, a user.professional_status event is published, triggering the corresponding email task.
+
+## Pluggable Email Template System
+What it does:
+Email content is dynamically rendered using templates (e.g., Markdown or Jinja2), filled with event-specific user data.
+
+Why it matters:
+
+Templates are reusable and easy to maintain.
+
+Supports localization, personalization, and consistent design.
+
+Example:
+A template like email_verification.md can render a custom greeting and a unique verification link.
+
+## Monitoring and Logging 
+What it does:
+You can track Celery task execution with logs or via a dashboard like Flower.
+
+Why it matters:
+
+Helps debug failures.
+
+Gives visibility into system health and performance.
+
+## Unit and Integration Testing Support
+What it does:
+Allows mocking and testing of:
+
+Template rendering
+
+Task queuing
+
+Email sending logic
+
+Why it matters:
+
+Increases code reliability
+
+Enables safe changes and refactoring
+
+Can test behavior without relying on external services like Mailtrap
+
+
+
  ## Learning this project:
  Through this project, I gained valuable insights into the product lifecycle and the process of building production-ready applications. Here are my key takeaways:
 - Testing is Essential at Every Stage
