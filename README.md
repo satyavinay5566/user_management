@@ -1,4 +1,4 @@
-# The User Management System 
+# Usermanagement final project
 
 The User Management System Final Project is designed as a comprehensive, hands-on opportunity to explore the full development lifecycle of a real-world software application. This system manages users, authentication, and roles, offering a practical implementation of backend development best practices using Python, FastAPI, SQLAlchemy, PostgreSQL, and modern authentication mechanisms like JWT. Whether you're defining schemas, managing secure login flows, or integrating third-party APIs (like email or OpenAI), this project gives you the complete playground to sharpen your backend skills in a robust and scalable way.
 
